@@ -34,6 +34,29 @@ test('Customer Should be able to Withdraw Amount', async ({loginPage, customerHo
     await expect(customerdashboardPage.withDrawalMessage).toBeVisible();
 
 })
+test('Customer Should recieve error message when trying to withdraw more than available', async ({loginPage, customerHomePage, customerdashboardPage}) => {
+
+    await loginPage.goto();
+    await loginPage.clickCustomerLogin();
+
+    await customerHomePage.selectCustomer();
+    await customerHomePage.login();
+
+    await customerdashboardPage.withdrawlmorethanbalance();
+
+    const balanceText = await customerdashboardPage.balance.innerText();  
+    const balance = parseFloat(balanceText.replace(/[^0-9.]/g, ''));
+
+    const withdrawAmount = balance + 10;
+
+    await customerdashboardPage.amountInput.fill(withdrawAmount.toString());
+  await customerdashboardPage.withDrawlButton.click();
+
+  
+  const errorMessage = await customerdashboardPage.overAmountWithDrawlMessage.innerText();
+  expect(errorMessage).toContain('Transaction Failed. You can not withdraw amount more than the balance.');
+
+});
 test('Customer Should be able to View Transections', async ({loginPage, customerHomePage, customerdashboardPage, transactionsPage}) => {
 
     await loginPage.goto();

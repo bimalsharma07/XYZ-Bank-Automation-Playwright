@@ -13,7 +13,9 @@ export class CustomerDashboardPage {
     readonly amountDepositButton: Locator;
     readonly withDrawlButton: Locator;
     readonly amountwithDrawlButton: Locator;
+    readonly overAmountWithDrawlMessage: Locator;
     readonly  transactions: Locator;
+    readonly balance: Locator;
     
 
     constructor(page: Page) {
@@ -27,7 +29,9 @@ export class CustomerDashboardPage {
         this.withDrawlButton = page.getByRole('button', { name: 'Withdrawl' });
         this.amountwithDrawlButton = page.getByRole('button', { name: 'Withdraw', exact: true })
         this.withDrawalMessage = page.getByText('Transaction successful');
-        this.transactions = page.getByRole('button', { name: 'Transactions' })
+        this.overAmountWithDrawlMessage = page.getByText('Transaction Failed. You can not withdraw amount more than the balance.');
+        this.transactions = page.getByRole('button', { name: 'Transactions' });
+        this.balance = page.locator('.center').filter({ hasText: 'Balance' });
 
     }
     async deposit() {
@@ -39,6 +43,11 @@ export class CustomerDashboardPage {
     async withdrawl() {
         await this.withDrawlButton.click()
         await this.amountInput.fill(testData.customer.withdrawAmount);
+        await this.amountwithDrawlButton.click()
+    }
+      async withdrawlmorethanbalance() {
+        await this.withDrawlButton.click()
+        await this.amountInput.fill(testData.customer.overWithdrawAmount);
         await this.amountwithDrawlButton.click()
     }
     async viewTransactions() {
