@@ -4,7 +4,8 @@ export const testData = {
       lastName : 'Doe',
       postCode : '23784',
      depositAmount: '2000',
-      withdrawAmount: '1000'
+      withdrawAmount: '1000',
+      overWithdrawAmount: '8000'
     },
      users: 
      {
