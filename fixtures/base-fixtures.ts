@@ -7,29 +7,53 @@ import {test as base} from '@playwright/test';
 
 
 type MyFixtures = {
-    loginPage : LoginPage;
+    loginPage: LoginPage;
     customerHomePage: CustomerHomePage;
     customerdashboardPage: CustomerDashboardPage;
-    transactionsPage : TransactionsPage;
-    bankManagerDashboardPage : BankManagerDashboardPage;
+    transactionsPage: TransactionsPage;
+    bankManagerDashboardPage: BankManagerDashboardPage;
 }
 
-export const test = base.extend<MyFixtures>({
-    loginPage : async ({page}, use) => {
+type SessionFixtures = {
+    customerSession: {
+        loginPage: LoginPage;
+        customerHomePage: CustomerHomePage;
+        customerdashboardPage: CustomerDashboardPage;
+    };
+    bankManagerSession: {
+        loginPage: LoginPage;
+        bankManagerDashboardPage: BankManagerDashboardPage;
+    };
+}
+
+export const test = base.extend<MyFixtures & SessionFixtures>({
+    loginPage: async ({ page }, use) => {
         await use(new LoginPage(page));
     },
-    customerHomePage : async ({page}, use) => {
+    customerHomePage: async ({ page }, use) => {
         await use(new CustomerHomePage(page));
     },
-    customerdashboardPage: async ({page}, use) => {
+    customerdashboardPage: async ({ page }, use) => {
         await use(new CustomerDashboardPage(page));
     },
-    transactionsPage : async ({page}, use) => {
+    transactionsPage: async ({ page }, use) => {
         await use(new TransactionsPage(page));
     },
-    bankManagerDashboardPage : async ({page}, use) => {
+    bankManagerDashboardPage: async ({ page }, use) => {
         await use(new BankManagerDashboardPage(page));
+    },
+    customerSession: async ({ loginPage, customerHomePage, customerdashboardPage }, use) => {
+        await loginPage.goto();
+        await loginPage.clickCustomerLogin();
+        await customerHomePage.selectCustomer();
+        await customerHomePage.login();
+        await use({ loginPage, customerHomePage, customerdashboardPage });
+    },
+    bankManagerSession: async ({ loginPage, bankManagerDashboardPage }, use) => {
+        await loginPage.goto();
+        await loginPage.clickBankManagerLogin();
+        await use({ loginPage, bankManagerDashboardPage });
     }
-})
+});
 
-export {expect} from '@playwright/test';
+export { expect } from '@playwright/test';
