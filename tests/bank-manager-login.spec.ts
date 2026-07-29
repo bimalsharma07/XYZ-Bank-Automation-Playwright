@@ -1,22 +1,15 @@
-import {test, expect} from '../fixtures/base-fixtures';
-test.describe('Bank Manager Login Flow', async() => {
+import { test } from '../fixtures/base-fixtures';
 
-test('Add customer', async ({loginPage, bankManagerDashboardPage }) => {
+test.describe('Bank Manager Login Flow', () => {
+    test('Add customer', async ({ bankManagerSession }) => {
+        await bankManagerSession.bankManagerDashboardPage.addCustomer();
+    });
 
-    await loginPage.goto();
-    await loginPage.clickBankManagerLogin();
-    await bankManagerDashboardPage.addCustomer();
-})
-test('Open Account', async ({loginPage, bankManagerDashboardPage }) => {
+    test('Open Account', async ({ bankManagerSession }) => {
+        await bankManagerSession.bankManagerDashboardPage.openAccount();
+    });
 
-    await loginPage.goto();
-    await loginPage.clickBankManagerLogin();
-    await bankManagerDashboardPage.openAccount();
-})
-test('View Customers', async ({loginPage, bankManagerDashboardPage }) => {
-
-    await loginPage.goto();
-    await loginPage.clickBankManagerLogin();
-    await bankManagerDashboardPage.customerList();
-})
-})
+    test('View Customers', async ({ bankManagerSession }) => {
+        await bankManagerSession.bankManagerDashboardPage.customerList();
+    });
+});
