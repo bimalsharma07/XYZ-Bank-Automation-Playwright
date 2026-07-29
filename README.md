@@ -15,7 +15,7 @@ Badges
 - Page Object Model (POM) pattern to keep tests readable and maintainable (see pages/*).
 - Reusable fixtures and session fixtures to share setup across tests and reduce flakiness (see fixtures/base-fixtures.ts).
 - Practical test ergonomics: HTML reports, trace viewer, parallel runs, and TypeScript type-safety.
-- (Optional / advanced) Guidance and examples for integrating Playwright MCP and agent-based test generation/healing workflows — useful to demonstrate modern test automation strategies on your CV.
+- Guidance and examples for integrating Playwright MCP and agent-based test generation/healing workflows.
 
 # Key skills showcased
 - Playwright (test authoring, selectors, parallel runs, tracing, reporting)
@@ -42,7 +42,7 @@ Badges
 Note: This repository currently contains a classic Playwright + POM implementation. The following section documents Playwright MCP and the Planner / Generator / Healer agent pattern and gives concrete integration guidance so you can present and demonstrate these capabilities in your portfolio.
 
 1) What is Playwright MCP (concise)
-- MCP (Model/Management/Control Plane) here refers to an agent-enabled approach layered on top of Playwright where automated agents coordinate test planning, test generation, and runtime healing/repair. (This section explains the concept and how it’s applied; adapt the name to the vendor/implementation you use in interviews.)
+- MCP (Model Context Protocol) here refers to an agent-enabled approach layered on top of Playwright where automated agents coordinate test planning, test generation, and runtime healing/repair.
 
 2) The agent roles — overview
 - Planner
