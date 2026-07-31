@@ -119,8 +119,6 @@ test-data/
 
 helpers/
 
-api/
-
 ---
 
 ## Naming
