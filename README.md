@@ -44,18 +44,18 @@ Note: This repository currently contains a classic Playwright + POM implementati
 1) What is Playwright MCP (concise)
 - MCP (Model Context Protocol) here refers to an agent-enabled approach layered on top of Playwright where automated agents coordinate test planning, test generation, and runtime healing/repair.
 
-2) The agent roles — overview
-- Planner
+2) # The agent roles — overview
+- # Planner
   - Purpose: Analyze product surface (pages, routes, components, or existing test coverage) and create a prioritized test plan or test intent list (user journeys, edge-cases, important flows).
   - Inputs: Sitemaps, existing tests, user stories, coverage reports.
   - Output: A set of human-readable test intents (e.g., "Customer can deposit and confirm transaction record").
 
-- Generator
+- # Generator
   - Purpose: Convert a plan/test-intent into concrete Playwright tests or test snippets. This includes creating page interactions, selectors, assertions and, optionally, data permutations.
   - Inputs: test intents from Planner, POM classes (to reuse), and test-data.
   - Output: TypeScript Playwright test files, or PRs/patches with generated tests ready for review.
 
-- Healer
+- # Healer
   - Purpose: When tests fail due to UI changes (selectors, text, small DOM changes), the Healer proposes minimal, safe fixes (selector updates, wait adjustments) and can optionally create PRs with fixes and test evidence (screenshots, trace).
   - Inputs: failing test run artifacts (screenshots, trace), historical selector mappings, heuristics.
   - Output: Suggested selector corrections, retries, or test updates.
