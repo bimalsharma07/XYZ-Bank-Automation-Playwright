@@ -10,7 +10,7 @@ export class CustomerHomePage extends BasePage {
   constructor(page: Page) {
     super(page);
     this.userSelect = page.locator('select#userSelect');
-    this.loginButton = page.getByRole('button', { name: 'Login' });
+    this.loginButton = page.getByRole('button', { name: 'Login', exact: true });
     this.logoutButton = page.getByRole('button', { name: 'Logout' });
   }
 
